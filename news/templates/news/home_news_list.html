@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }} :: {{ block.super }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+{{ mixin_prop }}
+      {% for item in news %}
+        <div class="card mb-3">
+          <div class="card-header">
+            {{ forloop.counter }}
+            !!Категория: <a href="{{ item.category.get_absolute_url }}">{{ item.category }}</a>
+          </div>
+          <div class="card-body">
+            <div class="media">
+               {% if item.photo %}
+                  <img src="{{ item.photo.url }}" alt="" width="350"  class="mr-3" align="left" style="margin-right: 15px !important;">
+               {% else %}
+                  <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.lmH_bbzWYjmgWbq5nXSLHwHaHa%26pid%3DApi&f=1&ipt=b8df01a4e4eb9f1cc7fba5fdafef0cdfe366ba54c8c3c82f90744a5b260bcfa9&ipo=images" alt="" width="350" class="mr-3" align="left" style="margin-right: 15px !important;">
+               {% endif %}
+               <div class="media-body">
+                  <h5 class="card-title {% cycle 'text-danger' 'text-success' %}">{{ item.title }}</h5>
+                  <p class="card-text">{{ item.content|safe|linebreaks|truncatewords:50 }}</p>
+                  <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Read more...</a>
+               </div>
+            </div>
+          </div>
+          <div class="card-footer text-muted">
+            {{ item.created_at|date:"Y-m-d H:i:s" }}
+          </div>
+        </div>
+      {% endfor %}
+{% endblock %}

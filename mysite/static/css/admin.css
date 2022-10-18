@@ -1,0 +1,17 @@
+#header{
+    background: #512da8;
+}
+.module caption, .inline-group h2 {
+    font-size: 0.70rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+:root {
+    --primary: #512da8;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    text-align: center;
+    border-radius: 6px;
+}
